@@ -56,14 +56,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'polls',
     'myadmin',
-    'news',
-    'shop',
+    #'news',
+    #'shop',
     'ueditor',
     'blog',
     'comments',
     'usersystem',
-    'wxkf',
-    'visiter',
+    #'wxkf',
+    #'visiter',
     'apilimiter',
     #'django_hosts'
     'Empire'
