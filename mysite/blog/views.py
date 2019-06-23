@@ -40,6 +40,7 @@ class IndexView(LimiterMixin, ListView):
     # 设置每页文章数量
     paginate_by = 5
 
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         paginator = context.get('paginator')
@@ -228,26 +229,24 @@ def search(request):
 # 发邮件
 @limiter(key='', times=30, rate=60)
 def mail_me(request):
+
     contact_name = request.POST['name']
     contact_email = request.POST['email']
     contact_subject = request.POST['subject']
     contact_message = request.POST['message']
-    content = {
-        "姓名": contact_name,
-        "邮箱": contact_email,
-        "内容": contact_message
-    }
+    content = "留言者：{},邮箱：{},内容：{}".format(contact_name,contact_email,contact_message)
     global MAIL_NUM
     if MAIL_NUM > 10:
-        return HttpResponse('<script>alert("今日邮件次数已用完,请明天再发"); location.href="/blog/index/"</script>')
+        return HttpResponse('<script>alert("今日邮件次数已用完,请明天再发"); location.href="/"</script>')
     else:
         try:
-            send_mail(contact_subject, content, settings.EMAIL_HOST_USER, [settings.EMAIL_BACK], fail_silently=False)
+            #
+            send_mail(contact_subject, content, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER2], fail_silently=False)
             MAIL_NUM += 1
-            return HttpResponse('<script>alert("发送成功"); location.href="/blog/index/"</script>')
+            return HttpResponse('<script>alert("发送成功"); location.href="/"</script>')
         except Exception as e:
             print(e)
-            return HttpResponse('<script>alert("发送失败"); location.href="/blog/contact/"</script>')
+            return HttpResponse('<script>alert("发送失败"); location.href="/blog_contact/"</script>')
 
 
 @limiter(key='', times=30, rate=60)
@@ -302,8 +301,6 @@ def compare(request):
     return render(request, 'blog/compare.html')
 
 
-
-
 # 首页 以下弃用
 def index(request):
     post_queryset = Post.objects.all().order_by('-created_time')
@@ -339,4 +336,5 @@ def detail(request, pk):
     return render(request, 'blog/detail.html', content)
 
 def contact(request):
+    request.session['userinfo'] = None
     return render(request, 'blog/contact.html')

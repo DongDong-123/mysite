@@ -43,7 +43,7 @@
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-right">
                             	<li class="cl-effect-11" id="logout">
-                                {% if request.session.userinfo.name %}
+                                {% if request.session.userinfo %}
                                     <a title="" id="usercenter">{{ request.session.userinfo.name }}</a>/
                                     <a href="{% url 'usersystem:logout' %}" title="" >退出</a>
                                 {% else %}

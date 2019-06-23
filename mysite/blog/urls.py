@@ -1,4 +1,4 @@
-from blog import views
+from . import views
 from django.urls import path
 
 

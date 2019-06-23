@@ -53,7 +53,7 @@ EMAIL_HOST_PASSWORD = contant["EMAIL"]["EMAIL_HOST_PASSWORD"]
 EMAIL_PORT = contant["EMAIL"]["EMAIL_PORT"]
 EMAIL_HOST = contant["EMAIL"]["EMAIL_HOST"]
 
-
+EMAIL_HOST_USER2 = contant["EMAIL"]["EMAIL_HOST_USER2"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
