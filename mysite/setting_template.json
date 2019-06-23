@@ -1,0 +1,23 @@
+{
+  "MYSQL": {
+    "mysql_user": "",
+    "mysql_passwd": "",
+    "PORT": ,
+    "DATABASE": ""
+
+  },
+  "REDIS": {
+    "redis_passwd": "",
+    "redis_passwd2": "",
+    "PORT": ,
+    "DATABASE":
+  },
+  "EMAIL":{
+    "EMAIL_HOST_USER": "",
+    "EMAIL_HOST_PASSWORD": "",
+    "EMAIL_PORT": ,
+    "EMAIL_HOST": ""
+
+  }
+
+}

@@ -50,7 +50,7 @@
 	        <div class="form-group">
 	          <div class="col-md-12">
 	          	<div class="control-wrapper">
-	          		<input type="submit" value="Log in" id="submit" class="btn btn-info" disabled="true">
+	          		<input type="submit" value="Log in" id="submit" class="btn btn-info" disabled>
 	          		<a href="{% url 'usersystem:forgotpwd' %}" class="text-right pull-right">Forgot password?</a>
 	          	</div>
 	          </div>
@@ -85,17 +85,24 @@
                     var code_info = document.getElementById('verifycode').value;
 
                     new RegExp;
-                    var patt_name=/^\w{2,20}$/;
-                    var patt_pwd=/^\w{4,12}$/;
-                    var patt_code=/^\w{4}$/;
+                    // var patt_name=/^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+					var patt_name = /^\w{2,20}/;  // 用戶名
+                    var patt_pwd=/^\w{4,12}$/;  // 密码
+                    var patt_code=/^\w{4}$/;  // 验证码
                     // console.log('ttt',name_info,pwd_info);
                     // console.log('ttt',patt_name.test(name_info),patt_pwd.test(pwd_info));
                     if(remeber.checked){
-                        remeber_info = '1'
+                        remeber_info = '1';
+						console.log(remeber_info)
                     }
+						console.log("test",patt_name.test(name_info));
+						console.log("test2",patt_pwd.test(pwd_info));
+						console.log("test3",patt_code.test(code_info));
+
                     if(patt_name.test(name_info) && patt_pwd.test(pwd_info) && patt_code.test(code_info)){
-                        $('#submit').attr('disabled', false)
+                        $('#submit').attr('disabled',false)
                     }else{
+                        console.log("all_parm",name_info,pwd_info,code_info);
                         $('#submit').attr('disabled', true)
                     }
                 };

@@ -93,16 +93,18 @@ class ForgotPWD(TemplateView):
 @limiter(key='', times=10, rate=60)
 def resetpwd(request):
     email = request.POST.get('email')
-    name = request.POST.get('name')
+    # name = request.POST.get('name')
     # 增加type数据，发送请求的对象进行分辨，响应相应的数据；数据范围0和1。
     check_type = request.POST.get('type')
-    #print(email)
-    #print(check_type, type(check_type))
+    print("---------------------")
+    # logging.info(email)
+    print(email)
+    print(check_type, type(check_type))
     # 0 为注册账户发送请求，已在前端对邮箱进行验证，不在重复验证，直接设为True
     if check_type == '0':
         subject = '用户注册'
         check_email = True
-        username = name
+        # username = name
     # 1为密码重置发送的请求
     else:
         subject = '密码重置'
@@ -116,11 +118,12 @@ def resetpwd(request):
         try:  # 验证码存入redis，有效期10分钟，
             conn = redis.StrictRedis(connection_pool=settings.POOL)
             conn.setex(username, 600, code)
+            # 注意，如果更改邮箱授权码，会导致失败
             # 调用邮箱模块，发送邮件，参数，1：主题；2：内容；3：收件人；发件人在setting内配置，4：是否抛出异常，false为抛出，
             send_mail(subject, '亲爱的{}用户您好，您的验证码为：{}，有效期10分钟。'.format(username, code), settings.EMAIL_HOST_USER, [email],
                       fail_silently=False)
         except ConnectionError as e:
-            print(e)
+            print(e, "发送邮件失败，请检查邮箱设置")
         # send_mass_mail  # 多封邮件
         result = '1'
         return HttpResponse(result)
@@ -176,9 +179,10 @@ def verifycode(request):
     rand_str = ''
     for i in range(0, 4):
         rand_str += str1[random.randrange(0, len(str1))]
-
-    #font = ImageFont.truetype('back/fonts/BRADHITC.TTF', 23)  # win
-    font = ImageFont.truetype('blog/fonts/NotoSansCJK-Regular.ttc', 23)  # linux
+    try:
+        font = ImageFont.truetype('back/fonts/BRADHITC.TTF', 23)  # win
+    except Exception as e:
+        font = ImageFont.truetype('blog/fonts/NotoSansCJK-Regular.ttc', 23)  # linux
 
     fontcolor = (255, random.randrange(0, 255), random.randrange(0, 255))
     draw.text((5, 2), rand_str[0], font=font, fill=fontcolor)

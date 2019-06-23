@@ -47,6 +47,14 @@ MYSQL_PASSWD = contant["MYSQL"]["mysql_passwd"]
 MYSQL_PORT = contant["MYSQL"]["PORT"]
 MYSQL_DATABASE = contant["MYSQL"]["DATABASE"]
 
+# 发送邮件配置
+EMAIL_HOST_USER = contant["EMAIL"]["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = contant["EMAIL"]["EMAIL_HOST_PASSWORD"]
+EMAIL_PORT = contant["EMAIL"]["EMAIL_PORT"]
+EMAIL_HOST = contant["EMAIL"]["EMAIL_HOST"]
+
+
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -243,11 +251,10 @@ AUTH_PASSWORD_VALIDATORS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = False  # 是否使用TLS安全传输协议(用于在两个通信应用程序之间提供保密性和数据完整性。)
 EMAIL_USE_SSL = True  # 是否使用SSL加密，qq企业邮箱要求使用
-EMAIL_HOST = 'smtp.qq.com'  # 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
-EMAIL_PORT = 465  # 发件箱的SMTP服务器端口
-# EMAIL_HOST_USER = 'zisehaiyang04@163.com'  # 发送邮件的邮箱地址
-EMAIL_HOST_USER = '305329031@qq.com'  # 发送邮件的邮箱地址
-EMAIL_HOST_PASSWORD = 'yakafpynhyaccbbi'  # 发送邮件的邮箱密码(这里使用的是授权码)
+EMAIL_HOST = EMAIL_HOST  # 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
+EMAIL_PORT = EMAIL_PORT  # 发件箱的SMTP服务器端口
+EMAIL_HOST_USER = EMAIL_HOST_USER  # 发送邮件的邮箱地址
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD  # 发送邮件的邮箱密码(这里使用的是授权码)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
