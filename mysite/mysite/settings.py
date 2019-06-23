@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     #'visiter',
     'apilimiter',
     #'django_hosts'
-    'Empire'
+    #'Empire'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
