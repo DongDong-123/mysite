@@ -1,0 +1,225 @@
+{% extends 'front/cart.html' %}
+
+	{% block css %}
+	<style type="text/css" media="screen">
+		.payinfo{
+			margin-top: 10px;
+		}
+		.payinfo input{
+			margin-top: 10px;
+			width: 500px;
+			height: 40px;
+
+		}
+	</style>
+	{% endblock css %}
+
+  {% block cart %}
+<body class="cart-app">
+    <!-- 导航 -->
+    <div class="layout-header" id="scroll-wrap">
+		<nav class="navbar navbar-default header hidden-xs hidden-sm">
+			<div class="container clearfix">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="layout-header-logo navbar-left">
+						<a target="_blank" href="./index.html" class="layout-header-logo-link" alt="魅族科技">
+							<img src="/static/front/public/img/logo.png">
+						</a>
+					</div>
+					<div class="navbar-left">
+						<ol class="breadcrumb">
+							<li>购物车</li>
+							<li class="active" style="color:blue;">确认订单</li>
+							<li>在线支付</li>
+							<li>完成 </li>
+						</ol>
+					</div>
+					<ul class="nav navbar-nav navbar-right layout-header-service clearfix" id="fordel">
+                        <li class="layout-header-service-item" id="layoutHeaderUser">
+                            <a href="javascript:;">欢迎!
+                                <span id="welcome">{{request.session.VipUser.username}}</span>
+                            </a>
+                        </li>
+                        <li class="layout-header-service-item am-text-sm">
+                            <a href="{% url 'logout' %}">
+                                <span class="am-icon-sign-out" id="userlogout"></span> 退出
+                            </a>
+                        </li>
+                        <li class="layout-header-service-item">
+                            <a href="login.html" >登录</a>
+                        </li>
+                        <li class="layout-header-service-item">
+                            <a href="{% url 'regedit' %}" target="_blank"  data-mtype="wmz_public_grzx_register">注册</a>
+                        </li>
+
+
+                        <li class="layout-header-service-item" id="layoutHeaderUser">
+                            <a class="layout-header-service-link g-user" href="{% url 'personal' %}" title="个人中心">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </a>
+                            <div class="layout-user-downmenu">
+                                <ul class="layout-user-downmenu-list">
+                                    <li class="layout-user-downmenu-item">
+                                        <a href="#" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的订单</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="layout-header-service-item layout-header-service-cart" id="layoutHeaderCart">
+                            <a class="layout-header-service-link" href="{% url 'cartindex' %}" data-mtype="wmz_public_yt_cart">
+                                <i class="glyphicon glyphicon-shopping-cart"></i>
+                                <span class="layout-header-service-cart-num">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right layout-header-nav clearfix">
+                        <li class="layout-header-nav-item">
+                            <a href="/user/index.html" class="layout-header-nav-link">魅族商城 </a>
+                            <p class="line-top hidden-xs"></p>
+                        </li>
+                    </ul>
+				</div>
+			</div>
+		</nav>
+    </div>
+    <!-- 导航 E-->
+    <!-- 主内容区域 -->
+    <div class="mainbody cart">
+		<div class="container">
+			<!-- 购物车详情头 -->
+			<table class="cart-header">
+				<tbody>
+					<tr>
+						<td class="cart-col-name col-md-3 hidden-xs hidden-sm" style="padding-left:80px;">图片</td>
+						<td class="cart-col-name col-md-3 hidden-xs hidden-sm">型号</td>
+						<td class="cart-col-price col-md-2 hidden-xs hidden-sm">单价(元)</td>
+						<td class="cart-col-number col-md-2 hidden-xs hidden-sm">数量</td>
+						<td class="cart-col-total col-md-1 hidden-xs hidden-sm">小计(元)</td>
+					</tr>
+				</tbody>
+			</table><!-- 购物车详情头 E-->
+			
+			<!-- 购物清单信息列表 -->
+			<div class="cart-merchant-list">
+				<div class="cart-merchant">
+					<table class="cart-merchant-body">
+						<tbody>
+						{% for v in orders %}
+							<tr class="cart-product" id="pro5">
+								<td class="cart-col-select col-md-3 col-xs-4 col-sm-4">  
+									<a href="" class="cart-product-link" target="_blank">
+										<img src="{{ v.picname }}" class="cart-product-img" alt="魅蓝 X">
+									</a>
+								</td>
+								<input type="hidden" name="pid" value="{{ v.id }}">
+								<td class="cart-col-name col-md-3 col-xs-8 col-sm-8">
+									<a href="meilanx.html" class="cart-product-link" target="_blank">
+									  <p>{{ v.goods }}</p>
+									  <span class="cart-product-desc">全网通公开版 流光金 32GB</span>
+									</a>
+								</td>
+								{% load pagetag %}
+								<td class="cart-col-price col-md-2 hidden-xs hidden-sm">
+									<p>
+										<span class="cart-product-price" id="prices">{{ v.price }}</span>
+									</p>
+								</td>
+								<td class="cart-col-number col-md-2 hidden-xs hidden-sm">
+									<div class="cart-product-number-adder">
+										<p class="cart-product-number-max show"></p>
+										<div>
+											<span class="number">{{ v.num }}</span>
+										</div>
+									</div>
+								</td>
+								<td class="cart-col-total col-md-1 hidden-xs hidden-sm">
+									<span class="cart-product-price total" id="totals">{% cheng v.price v.num %}</span>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div><!-- 购物清单信息列表 E-->
+		</div>
+		<!-- 结算详情 -->
+		<div class="cart-footer">
+			<div class="container">
+			   <div class="col-md-5">
+				   <span class="cart-footer-count">
+						共
+						<span class="cart-footer-num" id="totalCount"></span>
+						件商品
+				   </span>
+				</div>
+				<br>
+				<div class="cart-footer" style="height: 400px;">
+					<div class="container">
+						<span style="font-size:20px;">收货信息</span>
+					   <div class=" col-md-8 col-md-offset-2">
+							<div class="payinfo">
+							<form  id="createorder" action="{% url 'createorder' %}" method="post">
+							{% csrf_token %}
+								
+								<input type="hidden" name="ids" value="{{ ids|join:','  }}">
+							    收货人：<input style="margin-left: 15px;" type="text" name="linkman"><br>
+							    联系电话：<input type="text" name="phone"><br>
+							    收货地址：<input type="text" name="address"><br>
+							    邮编：<input style="margin-left: 30px;" type="text" name="code"><br>
+							   <!--  <input id="alltotal" type="hidden" name="total" value="">
+							    <input id="allnum" type="hidden" name="totalCount" value=""> -->
+							</form>    
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="cart-footer-right col-md-12 " style="background: #fff; text-align: right;">
+					<span class="cart-footer-sum">
+						<span class="cart-footer-text">已优惠</span>
+						<span class="cart-footer-num red" id="totalDiscount">0.00</span>
+						<span class="cart-footer-text">元， 合计(不含运费)：</span>
+						<span class="cart-footer-total" id="totalPrice"></span>
+					</span>
+					<div class="mz-btn success" id="cartSubmit">提交订单</div>
+					<div class="mz-btn success">
+						<a href="{% url 'cartindex' %}" style="color:white;">返回购物车</a>
+					</div>
+				</div>
+
+			</div>
+		</div><!-- 结算详情 E-->
+	</div>
+
+    <!-- 主内容区域 E-->
+	{% endblock cart %}
+    
+    {% block js %}
+	<script type="text/javascript">
+	var totalCount = 0;
+	$('.number').each(function(){
+		totalCount += Number($(this).html())
+		console.log('total',totalCount)
+        $('#allnum').val(Number(totalCount))
+
+	});
+	$('#totalCount').html(totalCount);
+
+    var totalprice = 0;
+    $('.total').each(function(){
+        totalprice += Number($(this).html())
+		// console.log('totalprice',totalprice,typeof(totalprice))
+  //       $('#alltotal').val(Number(totalprice))
+    });
+    $('#totalPrice').html(totalprice);
+
+    $('#cartSubmit').click(function(){
+        $('#createorder').submit();
+
+        console.log('submit')
+
+    })
+
+	</script>
+	{% endblock js %}

@@ -1,0 +1,26 @@
+{% extends 'blog_base.html' %}
+
+	<main class="col-md-12">
+		{% block main %}
+		<h1 class="page-title">Contact</h1>
+		<article class="post">
+			<div class="entry-content clearfix">
+				<form action="{% url 'blog:mail_me' %}" method="post" class="contact-form">
+                    {% csrf_token %}
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3">
+							<input type="text" name="name" placeholder="Name" required>
+							<input type="email" name="email" placeholder="Email" required>
+							<input type="text" name="subject" placeholder="Subject" required>
+							<textarea name="message" rows="7" placeholder="Your Message" required></textarea>
+							<button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Drop Me a Line</span></button>
+							<br>
+							<br>
+						</div>
+					</div>	<!-- row -->
+				</form>
+			</div>
+		</article>
+		{% endblock main %}
+	</main>
+				

@@ -1,0 +1,88 @@
+{% extends 'back/list_base.html' %}
+
+    {% block list_title %}
+    <div class="widget-title am-cf">商品列表</div>
+    {% endblock list_title %}
+
+    {% block jing %}
+        <button type="button" class="am-btn am-btn-default am-btn-success">
+        <span class="am-icon-plus"></span><a href="{% url 'goodsadd' %}" title="">新增</a> </button>
+        <button type="button" class="am-btn am-btn-default am-btn-secondary">
+        <span class="am-icon-save"></span> 保存</button>
+        <button type="button" class="am-btn am-btn-default am-btn-warning">
+        <span class="am-icon-archive"></span> 审核</button>
+        <button type="button" class="am-btn am-btn-default am-btn-danger">
+        <span class="am-icon-trash-o"></span> 删除</button>
+    {% endblock jing %}
+    {% block forms %}
+        <form action="" method="">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                    <label>
+                        <input type="text" name="keywords" value="{{ request.GET.keywords }}"
+                               class="   am-form-field ">
+                    </label>
+                    <span class="am-input-group-btn">
+                    <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field  am-icon-search">
+                    </button>
+                </span>
+                </div>
+            </div>
+        </form>
+        <div class="am-u-sm-12">
+            <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black ">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>商品缩略图</th>
+                        <th>分类</th>
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                {% for i in goods %}
+                <tbody>
+                <tr class="gradeX">
+                    <td class="am-text-middle">{{ i.id }}</td>
+                    <td class="am-text-middle">
+                    <img src="{{ i.picname }}" width='80px' alt="">
+                    </td>
+                    <td class="am-text-middle">{{ i.typeid.name }}</td>
+                    <td class="am-text-middle">{{ i.goods }}</td>
+                    <td class="am-text-middle">{{ i.price }}</td>
+                    <td class="am-text-middle">
+                    {% if i.state == 1 %}
+                        新品
+                    {% elif i.state == 2 %}
+                        在售
+                    {% else %}
+                        已下架
+                    {% endif %}
+                    </td>
+                    <td class="am-text-middle">
+                        <div class="tpl-table-black-operation">
+                            <a href="{% url 'goodsedit' i.id %}">
+                                <i class="am-icon-pencil"></i> 编辑
+                            </a>
+                            <a href="{% url 'goodsdel' i.id %}" class="tpl-table-black-operation-del">
+                                <i class="am-icon-trash"></i> 删除
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                    <!-- more data -->
+                </tbody>
+                {% endfor %}
+
+            </table>
+        </div>
+    {% endblock forms %}
+
+     {% block pages %}
+        <ul class="am-pagination tpl-pagination">
+            {% load pagetag %}
+            {% PageShow goods.paginator.num_pages request %}
+        </ul>
+    {% endblock pages %}

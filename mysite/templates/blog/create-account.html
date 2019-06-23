@@ -1,0 +1,271 @@
+{% extends 'blog/user_base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<head>
+	{% block head %}
+		<title>Create Account</title>
+	{% endblock head %}
+	{% block form %}
+		<h1 class="margin-bottom-15">Create Account</h1>		
+		<form class="form-horizontal templatemo-create-account templatemo-container" role="form" action="{% url 'usersystem:docreate' %}" method="post" id="form">
+			{%  csrf_token %}
+			<div class="form-inner">
+		        <div class="form-group">
+		          <div class="col-md-12">		          	
+		            <label for="email" class="control-label">Email</label>
+		            <input type="email" class="form-control" name="email" id="email" placeholder="请输入邮箱"><span id="notice"></span>	
+		          </div>              
+		        </div>			
+		        <div class="form-group">
+		          <div class="col-md-6">		          	
+		            <label for="username" class="control-label">Username</label>
+		            <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名">	<span id="notice_username"></span>	            		            		            
+		          </div>
+		          <div class="col-md-6 templatemo-radio-group">
+		          	<label class="radio-inline">
+	          			<input type="radio" name="optionsRadios" id="optionsRadios1" value="0"> Male
+	          		</label>
+	          		<label class="radio-inline">
+	          			<input type="radio" name="optionsRadios" id="optionsRadios2" value="1" checked > Female
+	          		</label>
+		          </div>             
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-6">
+		            <label for="password"  class="control-label">Password</label>
+		            <input type="password" name="pwd1" class="form-control" id="password" placeholder="请输入密码,4-12字母、数字、下划线！"><span id="notice_email"></span>
+		          </div>
+		          <div class="col-md-6">
+		            <label for="password_confirm" class="control-label">Confirm Password</label>
+		            <input type="password" class="form-control" name="pwd2" id="password_confirm" placeholder="请再次输入密码"><span id="notice_email2"></span>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-6" >
+		            <label for="password"  class="control-label">VerifyCode</label>
+		            <input type="text" name="code" class="form-control" id="VerifyCode" placeholder="请输入验证码！"><span id="notice_email"></span>
+		          </div>
+		          <div class="col-md-6" style="position: absolute">
+		            <label for="password" class="control-label"></label>
+		            <b id="send_code" style="position: relative; top: 28px;left: 350px;font-size: 18px"><a href="#"><img
+                            src="{% static 'blog/img/img_button.JPG' %}" alt=""></a></b>
+		          </div>
+		        </div>
+
+		        <div class="form-group">
+		          <div class="col-md-12">
+		            <label><input type="checkbox" id="policy" >I agree to the <a href="javascript:" data-toggle="modal" data-target="#templatemo_modal">Terms of Service</a> and <a href="#"></a></label>
+		          </div>
+		        </div>
+		        <div class="form-group">
+		          <div class="col-md-12">
+		            <input type="submit" value="Create account" class="btn btn-info" id="submit" disabled="true">
+		            <!-- <button type="">提交</button> -->
+		            <a href="{% url 'usersystem:login' %}" class="pull-right">Login</a>
+		          </div>
+		        </div>	
+			</div>				    	
+	    </form>	
+    {% endblock form %}
+				      
+	<!-- Modal -->
+	{% block foot %}
+	<div class="modal fade" id="templatemo_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="myModalLabel">服务条款</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<p>注册提醒您：本协议是加入本站的标准协议，您只有完全同意本协议条款，才能注册为本站的注册用户。您必须遵守中华人民共和国的互联网相关管理条例，其中包括不得利用本站危害国家安全、泄露国家秘密，不得侵犯国家社会集体的和公民的合法权益，不得利用本站制作、复制和传播下列信息：</p>
+	        <p>1、煽动抗拒、破坏宪法和法律、行政法规实施的；</p>
+	        <p>2、煽动颠覆国家政权，推翻社会主义制度的；</p>
+	        <p>3、煽动分裂国家、破坏国家统一的； </p>
+	        <p>4、煽动民族仇恨、民族歧视，破坏民族团结的；</p>
+	        <p>5、捏造或者歪曲事实，散布谣言，扰乱社会秩序的；</p>
+	        <p>6、宣扬封建迷信、淫秽、色情、赌博、暴力、凶杀、恐怖、教唆犯罪的；</p>
+	        <p>4、煽动民族仇恨、民族歧视，破坏民族团结的；</p>
+	        <p>7、公然侮辱他人或者捏造事实诽谤他人的，或者进行其他恶意攻击的； </P>
+		    <p>8、损害国家机关信誉的； </P>
+		    <p>9、其他违反宪法和法律行政法规的。 </P>
+		    <p></P>
+	        <p>特别提醒：本系统仅限于注册用户本人使用!您必须尊重他人的合法权利和劳动成果，严格遵守我国相关相关法律法规，不得直接或间接的通过本网站进行任何违法犯罪活动。</p>
+
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script type="text/javascript" src="{% static 'blog/js/jquery-2.1.4.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+	<script>
+                // 标识符
+        var email_value=false;
+        var username_value=false;
+        var password_value=false;
+        var verify_code=false;
+        var form = document.getElementById("form");
+        // ajax验证邮箱
+        $('#email').bind('change',function(){
+            // 通过input的id，获取input元素，使用value，获取输入的邮箱地址，赋给email变量
+            var email=document.getElementById("email").value;
+            // alert('test')
+            // 控制台打印，验证结果
+            // console.log('email',email);
+            // 判断邮箱是否为空
+            if(email.length!==0){
+                new RegExp();
+                var patt=/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/;
+                // 判断邮箱格式是否正确
+                if(patt.test(email)){
+                    // 发送post请求，共4个参数，1：发送的url，2：携带的参数，3：回调函数，4：返回数据类型
+                    $.post("{% url 'usersystem:test' %}",
+                        {'email':email, "csrfmiddlewaretoken": "{{ csrf_token }}"},
+                        function(data){
+                            // 打印返回数据
+                            // console.log(data);
+                            var text = document.getElementById('notice');
+                            if(data===1){
+                                text.innerHTML="邮箱已注册，请登录或重新输入！";
+                                $(function(){
+                                    email_value=false;
+                                    $('#notice').css("color","red")
+                                })
+
+                            }else{
+                                $('#notice').html('邮箱可用,请继续操作！');
+                                $(function(){
+                                    email_value=true;
+                                    // $('#get_code').attr('disabled',false);
+                                    $('#notice').css("color","green")
+                                })
+                            }
+                    },'json')
+                        }else{
+                            $('#notice').html("请输入正确的邮箱格式");
+                            $('#notice').css("color","red")
+                        }
+            }else{
+                $('#notice').html("请输入正确的邮箱格式");
+                $('#notice').css("color","red")
+            }
+        });
+        // ajax 验证用户名
+        $('#username').bind('change',function(){
+            // 通过input的id，获取input元素，使用value，获取输入的邮箱地址，赋给email变量
+            var username_elem=document.getElementById("username");
+            var username = username_elem.value;
+            // alert('test')
+            // 控制台打印，验证结果
+            // console.log('username',username,typeof(username));
+            // console.log('username',username,username.length);
+            new RegExp();
+            var patt=/^\w{2,20}$/;
+            if(patt.test(username)){
+                // 发送post请求，共4个参数，1：发送的url，2：携带的参数，3：回调函数，4：返回数据类型
+                $.post("{% url 'usersystem:test' %}",
+                    {'username':username, "csrfmiddlewaretoken": "{{ csrf_token }}"},
+                    function(data){
+                        // 打印返回数据
+                        // console.log(data);
+                        var text = document.getElementById('notice_username');
+                        if(data===1){
+                            text.innerHTML="昵称已存在，请重新输入！";
+                            $(function(){
+                                username_value=false;
+
+                                // $('#submit').attr('disabled',true);
+                                $('#notice_username').css("color","red")
+                            })
+
+                        }else{
+                            $('#notice_username').html('昵称可用,请继续操作！');
+                            $(function(){
+                                username_value=true;
+                                $('#notice_username').css("color","green")
+                            })
+                        }
+                },'json')
+            }else{
+                $('#notice_username').html('昵称不可为空,请输入！');
+                username_value=false
+            }
+
+        });
+        //验证密码
+        $('#password').bind('change', function(){
+            var pw1= document.getElementById('password').value;
+            new RegExp();
+            var patt=/^\w{4,12}$/;
+            // console.log('pw111',pw1,typeof(pw1))
+            // console.log('pw11',patt.test(pw1))
+            if(patt.test(pw1)){
+                $('#notice_email').html("密码格式正确！");
+                $('#notice_email').css("color","green")
+
+            }else{
+                $('#notice_email').html("密码格式不正确！");
+                $('#notice_email').css("color","red")
+            }
+        });
+        // 二次输入验证
+        $('#password_confirm').bind('change',function(){
+            var pw1 = document.getElementById('password').value;
+            var pw2= document.getElementById('password_confirm').value;
+
+            if(pw2===pw1){
+                $('#notice_email2').html("密码一致！");
+                $('#notice_email2').css("color","green");
+                password_value=true
+
+            }else{
+                $('#notice_email2').html("两次密码不一致！");
+                $('#notice_email2').css("color","red");
+                password_value=false
+            }
+        });
+        // 验证验证码格式==> 待扩展：ajax效验验证码是否正确
+         $('#VerifyCode').bind('change',function () {
+             var code = document.getElementById('VerifyCode').value;
+             verify_code = code.length === 6;
+         });
+
+        //验证所有输入项
+        form.onmousemove=function(){
+            // 验证服务条款
+            policy_value = !!policy.checked;
+            // console.log('policy',polic_value,typeof(polic_value))
+            // console.log('change',email_value,username_value)
+            if(email_value && username_value && password_value && policy_value && verify_code){
+                $('#submit').attr('disabled',false);
+            }else{
+                $('#submit').attr('disabled',true);
+            }
+            // console.log('change2',email_value,username_value,polic_value)
+        };
+        // 获取验证码
+        $('#send_code').bind('click',function () {
+            var email = document.getElementById('email').value;
+            var name = document.getElementById('username').value;
+            if(email && name){
+                $.post("{% url 'usersystem:resetpwd' %}",{'email':email,'name':name,'type':0,"csrfmiddlewaretoken": '{{ csrf_token }}'},function(data){
+                    if(data===2){
+                        alert('邮箱已注册，请登录！')
+                    }else if(data===1){
+                        alert('验证码已发送，请注意查收！(有效期10分钟)')
+                    }else{
+                        alert('验证码发送失败，请重试！')
+                    }
+                },'json')
+            }else {
+                alert('请输入正确的邮箱地址和用户名！')
+            }
+        })
+
+    </script>
+
+    {% endblock foot %}
+    

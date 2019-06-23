@@ -1,0 +1,112 @@
+{% extends 'blog/user_base.html' %}
+{% load staticfiles %}
+
+	{% block head %}
+		<title>Login One</title>
+	{% endblock head %}
+	{% block form %}
+		<h1 class="margin-bottom-15">Login</h1>
+		<form class="form-horizontal templatemo-container templatemo-login-form-1 margin-bottom-30" role="form" action="{% url 'usersystem:dologin' %}" method="post">
+			{%  csrf_token %}				
+	        <div class="form-group">
+	          <div class="col-xs-12">		            
+	            <div class="control-wrapper">
+	            	<label for="username" class="control-label fa-label"><i class="fa fa-user fa-medium"></i></label>
+	            	<input type="text" name='username' class="form-control" id="username" placeholder="Username">
+	            </div>		            	            
+	          </div>              
+	        </div>
+	        <div class="form-group">
+	          <div class="col-md-12">
+	          	<div class="control-wrapper">
+	            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+	            	<input type="password" class="form-control" name="passwd" id="password" placeholder="Password">
+	            </div>
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <div class="col-md-7">
+	          	<div class="control-wrapper">
+	            	<label for="password" class="control-label fa-label"><i class="fa fa-lock fa-medium"></i></label>
+	            	<input type="text" class="form-control" name="code" id="verifycode" placeholder="verifycode">
+	            </div>
+	          </div>
+	        <div class="col-md-5">
+	          	<div class="control-wrapper vcode">
+	            	<label for="code" class="control-label fa-label" id="label"><i class="fa fa-refresh fa-medium"></i><span id="code">点击获取验证码</span></label>
+	            	<img hidden src="{% url 'usersystem:vcode' %}" alt="" >
+	            </div>
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <div class="col-md-12">
+             	<div class="checkbox control-wrapper">
+                	<label>
+                  		<input type="checkbox" name="remeber" value="0" id="remeber" > Remember me
+            		</label>
+              	</div>
+	          </div>
+	        </div>
+	        <div class="form-group">
+	          <div class="col-md-12">
+	          	<div class="control-wrapper">
+	          		<input type="submit" value="Log in" id="submit" class="btn btn-info" disabled="true">
+	          		<a href="{% url 'usersystem:forgotpwd' %}" class="text-right pull-right">Forgot password?</a>
+	          	</div>
+	          </div>
+	        </div>
+	        <hr>
+	        <div class="form-group">
+	        	<div class="col-md-12">
+	        		<label>Login with: </label>
+	        		<div class="inline-block" id="other">
+	        			<a href="" title="暂未启用!"><i class="fa fa-facebook-square login-with"></i></a>
+		        		<a href="" title="暂未启用!"><i class="fa fa-twitter-square login-with"></i></a>
+		        		<a href="" title="暂未启用!"><i class="fa fa-google-plus-square login-with"></i></a>
+		        		<a href="" title="暂未启用!"><i class="fa fa-tumblr-square login-with"></i></a>
+		        		<a href="" title="暂未启用!"><i class="fa fa-github-square login-with"></i></a>
+	        		</div>		        		
+	        	</div>
+	        </div>
+	      </form>
+	      <div class="text-center">
+	      	<a href="{% url 'usersystem:create_account' %}" class="templatemo-create-new">Create new account <i class="fa fa-arrow-circle-o-right"></i></a>
+	      	<script src="{% static 'blog/js/jquery-2.1.4.min.js' %}"></script>
+	      </div>
+			<script>
+                // 头部链接暂时禁用
+                $("#other a").attr("disabled",true);
+                $("#other a").css("pointer-events","none");
+                // 登录事件
+                document.onmousemove=function(){
+                    var name_info=document.getElementById('username').value;
+                    var pwd_info=document.getElementById('password').value;
+                    var remeber_info=document.getElementById('remeber').value;
+                    var code_info = document.getElementById('verifycode').value;
+
+                    new RegExp;
+                    var patt_name=/^\w{2,20}$/;
+                    var patt_pwd=/^\w{4,12}$/;
+                    var patt_code=/^\w{4}$/;
+                    // console.log('ttt',name_info,pwd_info);
+                    // console.log('ttt',patt_name.test(name_info),patt_pwd.test(pwd_info));
+                    if(remeber.checked){
+                        remeber_info = '1'
+                    }
+                    if(patt_name.test(name_info) && patt_pwd.test(pwd_info) && patt_code.test(code_info)){
+                        $('#submit').attr('disabled', false)
+                    }else{
+                        $('#submit').attr('disabled', true)
+                    }
+                };
+                $('.vcode span').bind("click",function(){
+                    $(this).attr("hidden",true);
+                    $('.vcode img').removeAttr('hidden')
+                });
+                $('.vcode img').bind("click",function(){
+                    $(this).attr("src","{% url 'usersystem:vcode' %}?"+Math.random())
+                });
+            </script>
+    {% endblock form %}
+	
+		

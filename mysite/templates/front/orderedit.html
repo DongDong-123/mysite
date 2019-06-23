@@ -1,0 +1,56 @@
+{% extends 'front/personal.html' %}
+
+{% block forms %}
+<div class="tpl-content-wrapper">
+    <div class="container-fluid am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                <div class="page-header-heading">
+                    <span class="am-icon-home page-header-heading-icon">
+                    </span>订单管理
+                </div>
+            </div>
+            <div class="am-u-lg-3 tpl-index-settings-button">
+                <button type="button" class="page-header-button">
+                    <span class="am-icon-paint-brush">
+                    </span>设置
+                </button>
+            </div>
+        </div>
+    </div>
+
+<div class="am-u-md-9 am-u-md-offset-1">
+   <form action="{% url 'myorderupdate' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <input type="hidden" name="id" value="{{ tinfo.id}}">
+            <div class="am-form-group">
+                ID:<span>{{ tinfo.id }}</span>
+            </div>
+            <div class="am-form-group">
+               收货人:<input type="text" name="linkname" value="{{ tinfo.linkman }}">
+            </div>
+            <div class="am-form-group">
+               手机:<input type="text" name="phone" value="{{ tinfo.phone }}">
+            </div>
+            <div class="am-form-group">
+                收货地址:<input type="text" name="address" value="{{ tinfo.address }}">
+            </div>
+            <div class="am-form-group">
+               数量:<span>{{ tinfo.nums }}</span>
+            </div>
+            <div class="am-form-group">
+               下单时间:<span>{{ tinfo.addtime }}</span>
+            </div>
+                <!-- 状态 <select name="state" style="width: 200px;height: 30px">
+                        <option value="1">已付款</option>
+                        <option value="2">未付款</option>
+                        <option value="0">已关闭</option>
+                    </select> -->
+                    <br><br>
+            <button type="submit" style="width: 60px;">修改
+            </button>
+               
+        </form>
+</div>
+</div>
+{% endblock forms %}

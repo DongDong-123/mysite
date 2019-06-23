@@ -1,0 +1,79 @@
+{% extends 'blog_base.html' %}
+    {% block main %}
+    {% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
+        {% for article in content %}
+
+            <article class="post post-{{ article.pk }}">
+                <header class="entry-header">
+                    <h1 class="entry-title">
+                        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+                    </h1>
+                    <div class="entry-meta">
+                        <span class="post-category"><a href="#">分类:&nbsp;{{ article.category.name }}</a></span>
+                        <span class="post-date"><a href="#">
+                            <time class="entry-date" datetime="2012-11-09T23:15:57+00:00">
+                            发布时间:&nbsp;{{ article.created_time }}
+                            </time></a>
+                        </span>
+                        <span class="post-author"><a href="#">发布人:&nbsp;{{ article.author }}</a></span>
+                        <span class="comments-link"><a href="{{ article.get_absolute_url }}">阅读:&nbsp;{{ article.read_num }}</a></span>
+                        <span class="views-count"><a href="{{ article.get_absolute_url }}">评论:&nbsp;{{ article.comment_set.count }}</a></span>
+                        <span style="color:#000000">标签:&nbsp;</span>{% for tag in article.tags.all %}   
+                        <span class="tag" style="color:#000000">{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                </header>
+                <div class="entry-content clearfix">
+                    <a href="{{ article.get_absolute_url }}" title=""><p>{{ article.excerpt }}...</p></a>   
+                </div>
+                <hr>
+            </article>
+            {% empty %}
+            <div class="no-post">暂时没有文章！</div>
+        {% endfor %}
+
+        <!-- 分页 -->
+        {% if is_paginated %}
+            <div class="pagination text-center">
+                <ul class="pagination">
+                    
+                            
+                {% if first %}
+                    <li><a href="?page=1" >1</a></li>
+
+                {% endif %}
+
+                {% if left %}
+                    {% if left_has_more %}
+                        <li><a href="">...</a></li>
+                    {% endif %}
+
+                    {% for num in left %}
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endfor %}
+                {% endif %}
+                <li><a href="?{{ page_obj.number }}" style="color: red">{{ page_obj.number }}</a></li>
+                {% if right %}
+                    {% for num in right %}
+                        <li><a href="?page={{ num }}">{{ num }}</a></li>
+                    {% endfor %}
+                    {% if right_has_more %}
+                        <li><a href="">...</a></li>
+                    {% endif %}
+
+                {% endif %}
+                {% if last %}
+                        <li><a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                {% endif %}
+                </ul>
+
+            </div>
+        {% endif %}
+        
+        
+    {% endblock main %}
+           
+    
+            

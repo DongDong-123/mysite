@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  	<title> Flyme 账号 - 注册</title>
+    <meta name="description" content="欢迎登录和注册 Flyme 账号，您可以体验手机云服务功能，包括：在线下载应用，同步手机数据和查找手机等，让您的手机管理更加智能。">
+    <meta name="keywords" content="魅族 meizu 登录flyme 云服务 查找手机 充值账号 MX M9 MX2">
+    <link href="/static/front/public/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <link href="/static/front/public/img/favicon.ico" rel="icon" type="image/x-icon">
+    <!-- Bootstrap -->
+  	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  	<!-- Include all compiled plugins (below), or include individual files as needed -->
+  	<!-- 兼任ie9以下 -->
+  	<!--[if lt IE 9]>
+      		<script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+      		<script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+  	<![endif]-->
+    <!-- 自定义 -->
+    <link rel="stylesheet" type="text/css" href="/static/front/css/global.css">
+    <link rel="stylesheet" type="text/css" href="/static/front/css/register.css">
+    <!-- <script type="text/javascript" src="/static/front/js/rem.js"></script> -->
+    <script type="text/javascript" src="/static/front/js/topNav.js"></script>
+    <script src="/static/back/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/static/back/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/static/back/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/static/back/css/app.css">
+    <link rel="stylesheet" href="/static/front/css/bootstrap.min.css">    
+    <script type="text/javascript" src="/static/front/js/jquery-1.12.4.min.js"></script>
+
+    <style type="text/css" media="screen">
+        .am-form-group{
+
+            height: 60px;
+        }
+        .log{
+            font-size:50px;
+        }
+        body{
+            {#background: #}
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 导航 --> 
+    <div class="layout-header hidden-xs hidden-sm" id="scroll-wrap">
+        <nav class="navbar header ">
+            <div class="container ">
+                <div class="layout-header-logo navbar-left">
+                    <a target="_blank" href="./index.html" class="layout-header-logo-link" alt="魅族科技">
+                        <img src="/static/front/public/img/logo.png">
+                    </a>
+                </div> 
+                <ul class="nav navbar-nav navbar-right layout-header-service clearfix">
+                    <li class="layout-header-service-item" id="layoutHeaderUser">
+                        <a class="layout-header-service-link " href="{% url 'login' %}">
+                            <i class="glyphicon glyphicon-user"></i>
+                        </a>
+                        <div class="layout-user-downmenu">
+                            <ul class="layout-user-downmenu-list">
+                                <li class="layout-user-downmenu-item">
+                                    <a href="login.html" class="layout-user-downmenu-link">立即登录</a>
+                                </li>
+                                <li class="layout-user-downmenu-item">
+                                    <a href="{% url 'regedit' %}" target="_blank" class="layout-user-downmenu-link"     data-mtype="wmz_public_grzx_register">立即注册</a>
+                                </li>
+                                <li class="layout-user-downmenu-item">
+                                    <a href="#" class="layout-user-downmenu-link" data-mtype="  wmz_public_grzx_myorder">我的订单</a>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="layout-header-service-item layout-header-service-cart" id="layoutHeaderCart">
+                        <a class="layout-header-service-link" href="{% url 'cartindex' %}" data-mtype=" wmz_public_yt_cart">
+                            <i class="glyphicon glyphicon-shopping-cart"></i>
+                            <span class="layout-header-service-cart-num">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right layout-header-nav clearfix">
+                    <li class="layout-header-nav-item">
+                        <a href="{% url 'index' %}" class="layout-header-nav-link">魅族商城 </a>
+                        <p class="line-top hidden-xs"></p>
+                    </li>
+                </ul>     
+            </div>
+        </nav>
+    </div><!-- 导航 E--> 
+
+    <!-- 主内容区域 -->
+    <div class="banner-box" style="width:100%;">
+        
+    <div id="content" class="content">  
+        <div class="container"> 
+		    <div class="" style="margin-top:20px;">
+			<div class="container"> 
+                    <form class="am-u-sm-offset-5 am-form am-form-horizontal" id="regeditform" action="{% url 'insertregedit' %}"  method="post" enctype="multipart/form-data" style="width: 700px;">
+                        {% csrf_token %}
+                        <div class="am-form-group">
+                            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">用户名
+                            </label>
+                            <div class="am-u-sm-10 uname">
+                                <input type="text" name="name"  placeholder="请输入用户名">
+                                <span id='notice1'></span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">密码
+                            </label>
+                            <div class="am-u-sm-10  pw1">
+                                <input type="password" name="password"  placeholder="请输入密码">
+                                <span id='notice2'></span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">密码
+                            </label>
+                            <div class="am-u-sm-10 pw2">
+                                <input type="password" name="password2"  placeholder="请再次输入密码">
+                                <span id='notice3'></span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">地址
+                            </label>
+                            <div class="am-u-sm-10">
+                                <input type="text"  placeholder="请输入地址，可为空">
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">手机号
+                            </label>
+                            <div class="am-u-sm-10 phonenum">
+                                <input type="number" name="phone" placeholder="输入你的手机号，可为空">
+                                <span id='notice4'></span>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">电子邮件
+                            </label>
+                            <div class="am-u-sm-10">
+                                <input type="email" name="email"  placeholder="输入你的电子邮件">
+                            </div>
+                        </div>
+                        
+                        <div class="am-form-group" hidden >
+                            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">状态
+                            </label>
+                            <div class="am-u-sm-10">
+                                <select name="state" >
+                                    <option selected value="1">会员</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">头像</label>
+                            <input type="file" name="img">  
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-offset-2">
+                                <div id="flymeService" class="rememberField" style="font-size:12px;">
+                                    <label class="pointer am-form-label" for="acceptFlyme" tabindex="0">                      点击立即注册，即表示您同意并愿意遵守</label>
+                                    <a href="/serviceAgreement" target="_blank" class="linkABlue">Flyme服务协议</a>
+                                    <label class="pointer">和</label>
+                                    <a href="#" target="_blank" class="linkABlue">法律声明</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <div class="am-u-sm-10 am-u-sm-offset-2">
+                                <button class="am-btn am-btn-default" style="padding: 0;">
+                                <a id="nextStep" class="fullBtnBlue register-btn" data-step="1" style="margin: 0;"> 立即注册</a>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+		      	</div>
+		    </div>
+        </div>
+    </div>
+    </div>
+
+     <!-- 主内容区域  E-->
+
+    <!-- 底部区域 -->
+    <div id="flymeFooter " class="footerWrap hidden-xs hidden-sm">
+    <div class="container">
+      <div class="footer-layer1">
+        <div class="footer-innerLink">
+          <a href="#" target="_blank" title="关于魅族">关于魅族</a>
+          <img class="foot-line" src="/static/front/public/img/space.gif">
+          <a href="#" target="_blank" title="工作机会">工作机会</a>
+          <img class="foot-line" src="/static/front/public/img/space.gif">
+          <a href="#" target="_blank" title="联系我们">联系我们</a>
+          <img class="foot-line" src="/static/front/public/img/space.gif">
+          <a href="#" target="_blank" title="法律声明">法律声明</a>
+          <img class="foot-line" src="/static/front/public/img/space.gif">
+          
+          <div href="javascript:void(0);" id="globalName" class="footer-language" title="简体中文">
+            简体中文&nbsp;&nbsp;&nbsp;
+            <div id="globalContainer" class="footer-language_menu">
+              <a href="#" id="i18n-link" title="English" class="ClobalItem">English</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-service">
+          <span class="service-label">客服热线</span>
+          <span class="service-num">400-788-3333</span>
+          <a id="service-online" class="service-online" href="javascript:void(0);" title="在线客服">在线客服</a>
+        </div>
+        <div class="footer-outerLink">
+          <a class="footer-sinaMblog" href="#" target="_blank"><i class="i_icon"></i></a>
+          
+          <a id="footer-weChat" class="footer-weChat" href="javascript:void(0);" target="_blank"><i class="i_icon"></i></a>
+          <a class="footer-qzone" href="#" target="_blank"><i class="i_icon"></i></a>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div id="flymeCopyright" class="copyrightWrap">
+        <div class="copyrightInner">
+          <span>&copy;2017 Meizu Telecom Equipment Co., Ltd. All rights reserved.</span>
+          <a href="#" class="linkAGray" target="_blank">备案号: 粤ICP备13003602号-4</a>
+          <a href="#" class="linkAGray" target="_blank">经营许可证编号: 粤B2-20130198</a>
+          <a target="_blank" href="#" class="linkAGray">营业执照</a>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- 底部区域 E -->
+  
+<!-- <script type="text/javascript">
+  nLogin();
+</script> -->
+
+<script type="text/javascript">
+    var Regeditform = document.getElementById('regeditform');
+    var Names = Regeditform.name;
+    var Pwd1 = Regeditform.password;
+    var Pwd2 = Regeditform.password2;
+    var Phone = Regeditform.phone;
+
+    var nameResult; 
+    var pwd1Result;
+    var pwd2Result;
+    var phoneResult;
+    var passd1;
+    var passd2;
+
+    Names.onfocus = function(){
+        $('.uname span').html('请输入4-12位的数字字母下划线');
+        $('.uname span').css('color','#ccc');
+    };
+    Names.onblur = function(){
+        var nam = Names.value;
+        var reg = /^\w{4,12}$/;
+        console.log('nam',nam);
+        nameResult = reg.test(nam);
+        console.log('nameResult',nameResult);
+        if(nameResult){
+            $.get('{% url "checkregedit" %}',{'Nam':nam},function(data){
+                console.log('data',data);
+                if(data==1){
+                    $('.uname span').html('用户名已存在');
+                    $('.uname span').css('color','red');
+                }else{ 
+                    $('.uname span').html('输入正确');
+                    $('.uname span').css('color','green');
+                }
+            });
+        }else{
+            $('.uname span').html('输入错误');
+            $('.uname span').css('color','red');
+        }
+    };
+
+    Pwd1.onfocus = function(){
+        $('.pw1 span').html('请输入6-12位的数字字母下划线');
+        $('.pw1 span').css('color','#ccc');
+    };
+    Pwd1.onblur = function(){
+        passd1 = Pwd1.value;
+        var reg = /^\w{6,12}$/;
+        pwd1Result = reg.test(passd1);
+        console.log('passd1',passd1);
+        if(pwd1Result){
+            $('.pw1 span').html('输入正确');
+            $('.pw1 span').css('color','green');
+        }else{
+            $('.pw1 span').html('输入错误');
+            $('.pw1 span').css('color','red');
+        }
+    };
+    Pwd2.onfocus = function(){
+            $('.pw2 span').html('请输入6-12位的数字字母下划线');
+            $('.pw2 span').css('color','#ccc');
+        };
+        Pwd2.onblur = function(){
+            passd2 = Pwd2.value;
+            var reg = /^\w{6,12}$/;
+            pwd2Result = reg.test(passd2);
+            console.log('passd2',passd2);
+
+            if(pwd2Result){
+                if(passd1==passd2){
+                    $('.pw2 span').html('输入正确');
+                    $('.pw2 span').css('color','green');
+                }else{
+                    $('.pw2 span').html('两次密码不一致');
+                    $('.pw2 span').css('color','red');
+                }
+            }else{
+                $('.pw2 span').html('输入错误');
+                $('.pw2 span').css('color','red');
+            }
+        };
+    Phone.onfocus = function(){
+        $('.phonenum span').html('请输入11位手机号');
+        $('.phonenum span').css('color','#ccc')
+    };
+    Phone.onblur = function(){
+        var phones = Phone.value;
+        var reg = /^\d{11}$/;
+        phoneResult = reg.test(phones);
+        if(phoneResult){
+            $('.phonenum span').html('输入正确');
+            $('.phonenum span').css('color','green');
+        }else{
+            $('.phonenum span').html('输入错误');
+            $('.phonenum span').css('color','red');
+        }
+    };
+
+</script>
+</body>
+</html>

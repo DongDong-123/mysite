@@ -1,0 +1,19 @@
+{% extends 'back/base.html' %}
+
+        {% block title %}
+            <span class="am-icon-home page-header-heading-icon">
+            </span>轮播图展示
+        {% endblock title %}
+        <!-- 图片展示 -->
+        {% block forms %}
+            <div class="am-form-group">
+                {% for i in allimg %}
+                <ol>
+                    <li style="display: inline;">{{i.id}}</li>
+                    <li style="display: inline;"><img src="/{{i.img}}" alt="" width="500px"></li>
+                </ol>
+                {% endfor %}
+            </div>
+        {% endblock forms %}
+
+

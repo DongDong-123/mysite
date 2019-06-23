@@ -1,0 +1,134 @@
+{% extends 'front/cart.html' %}
+	{% block css %}
+
+	<style type="text/css" media="screen">
+		.payinfo{
+			margin-top: 10px;
+		}
+		.payinfo input{
+			margin-top: 10px;
+			width: 500px;
+			height: 40px;
+
+		}
+	</style>
+	{% endblock %}
+    {% block cart %}
+<body class="cart-app">
+    <!-- 导航 -->
+    <div class="layout-header" id="scroll-wrap">
+		<nav class="navbar navbar-default header hidden-xs hidden-sm">
+			<div class="container clearfix">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="layout-header-logo navbar-left">
+						<a target="_blank" href="./index.html" class="layout-header-logo-link" alt="魅族科技">
+							<img src="/static/front/public/img/logo.png">
+						</a>
+					</div>
+					<div class="navbar-left">
+						<ol class="breadcrumb">
+							<li>购物车</li>
+							<li>确认订单</li>
+							<li class="active" style="color:blue;">在线支付</li>
+							<li>完成 </li>
+						</ol>
+					</div>
+					<ul class="nav navbar-nav navbar-right layout-header-service clearfix" id="fordel">
+                        <li class="layout-header-service-item" id="layoutHeaderUser">
+                            <a href="javascript:;">欢迎!
+                                <span id="welcome">{{request.session.VipUser.username}}</span>
+                            </a>
+                        </li>
+                        <li class="layout-header-service-item am-text-sm">
+                            <a href="{% url 'logout' %}">
+                                <span class="am-icon-sign-out" id="userlogout"></span> 退出
+                            </a>
+                        </li>
+                        <li class="layout-header-service-item">
+                            <a href="login.html" >登录</a>
+                        </li>
+                        <li class="layout-header-service-item">
+                            <a href="{% url 'regedit' %}" target="_blank"  data-mtype="wmz_public_grzx_register">注册</a>
+                        </li>
+
+
+                        <li class="layout-header-service-item" id="layoutHeaderUser">
+                            <a class="layout-header-service-link g-user" href="{% url 'personal' %}" title="个人中心">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </a>
+                            <div class="layout-user-downmenu">
+                                <ul class="layout-user-downmenu-list">
+                                    <li class="layout-user-downmenu-item">
+                                        <a href="#" class="layout-user-downmenu-link" data-mtype="wmz_public_grzx_myorder">我的订单</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="layout-header-service-item layout-header-service-cart" id="layoutHeaderCart">
+                            <a class="layout-header-service-link" href="{% url 'cartindex' %}" data-mtype="wmz_public_yt_cart">
+                                <i class="glyphicon glyphicon-shopping-cart"></i>
+                                <span class="layout-header-service-cart-num">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right layout-header-nav clearfix">
+                        <li class="layout-header-nav-item">
+                            <a href="/user/index.html" class="layout-header-nav-link">魅族商城 </a>
+                            <p class="line-top hidden-xs"></p>
+                        </li>
+                    </ul>
+				</div>
+			</div>
+		</nav>
+
+    </div>
+    <!-- 导航 E-->
+    <!-- 主内容区域 -->
+    <div class="mainbody cart">
+		<div class="cart-footer" id="cartFooter" style="height: 500px;">
+			<div class="container">
+			   <div class="cart-footer-left col-md-8 col-md-offset-2 col-xs-3 col-sm-3">
+					<div class="payinfo">
+						订单号：<span>{{ odisplay.uid }}</span><br>
+					    收 &nbsp;货&nbsp;人：&nbsp;<span>{{ odisplay.linkman }}</span><br>
+					    数量：<span>{{ odisplay.nums }}</span><br>
+					    联系电话：<span>{{ odisplay.phone }}</span><br>
+					    收货地址：<span>{{ odisplay.address }}</span><br>
+					    邮编：<span>{{ odisplay.code }}</span><br>
+					    购买时间：<span>{{ odisplay.addtime }}</span><br>
+					</div>
+				</div>
+			</div>
+		</div><br>
+		<div class="container">
+			<div class="cart-footer-left col-md-8 col-md-offset-10 col-xs-3 col-sm-3">
+				<h3>请付款:{{ odisplay.total }}</h3>
+			</div>
+		</div>
+		<div class="cart-footer" >
+			<div class="container">
+				<div class="cart-footer-right col-md-12 " style="background: #fff; text-align: right;">
+					
+					<div class="mz-btn success" id="cartSubmit">
+						<a href="{% url 'payonline' odisplay.id %}" style="color:white;">付款</a>
+					</div>
+					<div class="mz-btn success">
+						<a href="{% url 'cartindex' %}" style="color:white;">返回购物车</a>
+					</div>
+				</div>
+		</div>
+		</div>
+
+
+
+	</div>
+    <!-- 主内容区域 E-->
+	{% endblock cart %}
+	{% block js %}
+        <script type="text/javascript">
+                //回顶部
+                backTop();
+
+        </script>
+    {% endblock js%}

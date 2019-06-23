@@ -1,0 +1,90 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% block head %}
+	
+	{% endblock head %}
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="{% static 'blog/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'blog/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'blog/css/bootstrap-theme.min.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'blog/css/templatemo_style.css' %}" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="{% static 'blog/js/jquery-2.1.4.min.js' %}"></script>
+	<style type="text/css" media="screen">
+		#logout {display: inline-block;
+            width: 100px;
+            padding: 15px 5px;
+            }
+	    #logout a{
+	        margin-right: 2px;
+	        display: inline;
+	        font-size: 12px;
+	        padding: 5px;
+	    }
+			
+		</style>	
+</head>
+<body>
+	<div class="container">
+        <header id="site-header">
+            <div class="row">
+            	<nav class="main-nav" role="navigation">
+                        <div class="navbar-header">
+                            <button type="button" id="trigger-overlay" class="navbar-toggle">
+                                <span class="ion-navicon"></span>
+                            </button>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-right">
+                            	<li class="cl-effect-11" id="logout">
+                                {% if request.session.userinfo.name %}
+                                    <a title="" id="usercenter">{{ request.session.userinfo.name }}</a>/
+                                    <a href="{% url 'usersystem:logout' %}" title="" >退出</a>
+                                {% else %}
+                                    <a href="{% url 'usersystem:create_account' %}" data-hover="">注册</a>/
+                                    <a href="{% url 'usersystem:login' %}" data-hover="">登录</a>
+                                {% endif %}
+                                </li>
+                                <li class="cl-effect-11"><a href="{% url 'blog:index' %}" data-hover="首页">首页</a></li>
+                                <li class="cl-effect-11"><a href="#" data-hover="博客">博客</a></li>
+                                <li class="cl-effect-11"><a href="#" data-hover="关于">关于</a></li>
+                                <li class="cl-effect-11"><a href="{% url 'blog:contact' %}" data-hover="联系">联系</a></li>
+                            </ul>
+                        </div><!-- /.navbar-collapse -->
+                </nav>
+            </div>
+        </header>
+    </div>
+    <div  class="templatemo-bg-gray">
+	<div class="container">
+        <div class="col-md-8 col-sm-7 col-xs-4">
+        	
+        </div>
+
+		<div class="col-md-12">
+
+			{% block form %}
+			
+	        {% endblock form %}
+		</div>
+	</div>
+	{% block foot %}
+			
+    {% endblock foot %}
+    <script>
+        $("#usercenter").attr("disabled",true);
+        $("#usercenter").css("pointer-events","none");
+    </script>
+    <script src="{% static 'blog/js/fun_rasult.min.js' %}">
+
+    </script>
+
+</div>
+</body>
+</html>

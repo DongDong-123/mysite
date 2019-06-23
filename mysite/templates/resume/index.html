@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="/static/resume/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/resume/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/static/resume/css/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Tauri' rel='stylesheet' type='text/css'>
+      <style>
+
+          .education-field {
+              font-size: 16px;
+
+          }
+      </style>
+    <title>个人简历</title>
+  </head>
+  <body style="margin-top:50px;" data-post="#/free-resume-template-bootstrap-3/">
+    <div class="container">
+      <div class="row header">
+        <div class="col-lg-8 col-md-9 col-xs-12  name-field">
+          <h2>刘冬洋</h2>
+          <p>Python开发</p>
+        </div>
+
+        <div class="col-md-4 text-right">
+         
+            <div class="adress-category">我的位置</div>
+          <div class="adress-content">
+            <label>北京市</label>
+            <label>丰台区</label>
+          </div>
+
+        </div>
+        
+      </div>
+
+       <div class="row">
+          <div class="col-md-3 animated">
+            <a href="mailto:zisehaiyang05@sina.com" class="btn btn-primary btn-lg">
+              <i class="fa fa-envelope"></i>联系我
+            </a>
+          </div>
+        </div>
+
+      <div class="row personal-data">
+        <div class=" col-lg-6 col-md-6 col-xs-12">
+{#        <div class="row box  green">#}
+{#        #}
+{#          #}
+{#          <h2>个人简介</h2>#}
+{#          <p>#}
+{#               略... #}
+{#          </p>#}
+{#          #}
+{#          #}
+{#        </div>#}
+        
+          <div class="row box red">
+            <h2>技能</h2>
+            
+              <ul class="lst-skills">
+
+              </ul>
+              <div class="progress">
+                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                      <span class="sr-only">80% Complete (danger)</span>
+                      <span>Python</span>
+                  </div>
+              </div>
+              <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                      <span class="sr-only">60% Complete (success)</span>
+                      <span>Django</span>
+                  </div>
+              </div>
+              <div class="progress">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                      <span class="sr-only">30% Complete (warning)</span>
+                        <span>Flask</span>
+                  </div>
+                </div>
+              <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+                      <span class="sr-only">50% Complete</span>
+                        <span>MySQL</span>
+                  </div>
+                </div>
+              <div class="progress">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width: 55%">
+                      <span class="sr-only">40% Complete (warning)</span>
+                        <span>Linux</span>
+                  </div>
+                </div>
+
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                      <span class="sr-only">20% Complete (warning)</span>
+                        <span>HTML & CSS</span>
+                  </div>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                      <span class="sr-only">20% Complete (warning)</span>
+                        <span>JavaScript</span>
+                  </div>
+                </div>
+              <div class="progress">
+                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                      <span class="sr-only">30% Complete (warning)</span>
+                        <span>English</span>
+                  </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="copyrights">  <a href="" ></a></div>
+        <div class="col-lg-5 col-md-5 col-xs-11 ML">
+          <div class="row border-box ">
+
+            <h2>项目经验</h2>
+              <div class="education-field">
+                  <p>2018.11 - 2018.11</p>
+                  <label>个人博客</label></br>
+                  <label> <a href="{% url 'blog:index' %}" target="blank">项目链接</a></label>
+              </div>
+              <div class="education-field">
+                  <p>2018.10 - 2018.10</p>
+                  <label>财经新闻</label></br>
+                  <label> <a href="{% url 'newsindex' %}" target="blank">项目链接</a>  </label>
+
+              </div>
+              <div class="education-field">
+                   <p>2018.6 - 2018.6</p>
+                   <label>商城后台开发</label> </br>
+                   <label><a href="" title="Wait a monent" class="disabled"></a></label>
+               </div>
+
+        </div> 
+
+          <div class="row border-box">
+            <h2>爱好</h2>
+            <ul class="hobbies">
+              <li><i class="glyphicon glyphicon-plane"></i> 运动</li>
+                <li><i class="glyphicon glyphicon-book"></i> 阅读</li>
+                <li><i class="glyphicon glyphicon-headphones"></i> 音乐</li>
+                
+            </ul>
+          </div>
+        </div>
+      </div>
+
+{#        <video width="320" height="240" controls>#}
+{#        <source src="" type="video/mp4">#}
+{#        </video>#}
+      <div class="row footer">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+          <p> <a href="" target="_blank" title=""></a> &copy 2018 dondong  备案号：京ICP备18059530号 <a href="" title="" target="_blank"></a></p>
+        </div>
+      </div>
+    </div>
+  <script src="/static/resume/js/jquery-1.10.2.min.js"></script>
+    <script src="/static/resume/js/bootstrap.min.js"></script>
+    <script src="/static/resume/js/dropdown.js"></script> 
+  </body>
+</html>  
