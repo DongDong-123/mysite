@@ -1,25 +1,26 @@
 import markdown
-# from markdown.extensions.toc import TocExtension
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Tag, Category
 from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView
-# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-# from django.utils.text import slugify
+
 from django.http import HttpResponse
 from django.db.models import Q
+
 # import time
 # from django.views.generic import View
 # from django.core.cache import cache
+# from markdown.extensions.toc import TocExtension
+# from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.utils.text import slugify
+
 from django.core.mail import send_mail
 from django.conf import settings
 import requests
 from pyquery import PyQuery as pq
 
-import redis
-from random import choice
 
-# 反爬22
+# 反爬
 from apilimiter.mixin import LimiterMixin
 from apilimiter.decorators import limiter
 
@@ -29,6 +30,7 @@ MAIL_NUM = 0
 
 # 首页
 class IndexView(LimiterMixin, ListView):
+    # 访问频率控制
    # key = 'user.id'
    # times = 20
    # redirect = ''
@@ -172,8 +174,6 @@ class PostDetialView(LimiterMixin, DetailView):
     template_name = 'blog/detail.html'
     context_object_name = 'content'
 
-    # read = Post()
-    # read.increase_views()
 
     def get(self, request, *args, **kwargs):
         response = super(PostDetialView, self).get(request, *args, **kwargs)
@@ -195,6 +195,7 @@ class PostDetialView(LimiterMixin, DetailView):
         return post
 
     def get_context_data(self, *, object_list=None, **kwargs):
+
         context = super(PostDetialView, self).get_context_data(**kwargs)
         form = CommentForm()
         comment_list = self.object.comment_set.all().order_by('-created_time')
@@ -210,13 +211,6 @@ class PostDetialView(LimiterMixin, DetailView):
 def search(request):
     find = request.GET.get('find')
     error_msg = ''
-
-    #def get_visit_num_data(self, *args):
-    #    if request.META.get('visit_num'):
-    #        print('ok')
-    #    else:
-    #        print('false')
-    
 
     if not find:
         error_msg = '请输入关键字'
@@ -249,10 +243,12 @@ def mail_me(request):
             return HttpResponse('<script>alert("发送失败"); location.href="/blog_contact/"</script>')
 
 
+# ip查询
 @limiter(key='', times=30, rate=60)
 def search_ip(request):
+    import requests
+
     data = request.POST.get('data')
-    #print('data', data)
     search = 'https://apikey.net/?ip={}'.format(data)
     header = {
         "accept": "*/*",
@@ -263,19 +259,20 @@ def search_ip(request):
     }
     res = requests.get(search, headers=header, verify=False)
     code = res.status_code
-    #print(code)
     if code == 200:
         text = res.text
-        #print(text)
         html = pq(text)
         return HttpResponse("{}".format(html.text()))
     else:
         return HttpResponse("查询失败:", code)
 
 
-# 代理
+# 代理池
 @limiter(key='', times=30, rate=60)
 def proxy_pool(request):
+    from random import choice
+    import redis
+
     conn = redis.Redis(connection_pool=settings.POOL)
     proxy_result = conn.zrangebyscore('proxies', 100, 100)
     if len(proxy_result):
@@ -296,45 +293,11 @@ class PoolEmptyError(Exception):
     def __str__(self):
         return repr('代理池已经枯竭')
 
+
 # 文本对比工具
 def compare(request):
     return render(request, 'blog/compare.html')
 
 
-# 首页 以下弃用
-def index(request):
-    post_queryset = Post.objects.all().order_by('-created_time')
-    content = {'content': post_queryset}
-    return render(request, 'blog/index.html', content)
-
-
-def category(request, pk):
-    cate = get_object_or_404(Category, pk=pk)
-    post_list = Post.objects.filter(category=cate).order_by('-created_time')
-    return render(request, 'blog/index.html', context={'content': post_list})
-
-
-def archives(request, year, month):
-    # print(year, month, type(year), type(month))
-    post_list = Post.objects.filter(created_time__year=year, created_time__month=month).order_by('-created_time')
-    archives_num = post_list.count()
-    # print(archives_num)
-    content = {'content': post_list, 'archives_num': archives_num}
-    return render(request, 'blog/index.html', content)
-
-
-# 文章详情
-def detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.increase_views()
-    post.body = markdown.markdown(post.body, extensions=['markdown.extensions.extra', 'markdown.extensions.codehilite',
-                                                         'markdown.extensions.toc'])
-    form = CommentForm()
-    comment_list = post.comment_set.all()
-    #print('post', post)
-    content = {'post': post, 'form': form, 'comment_list': comment_list}
-    return render(request, 'blog/detail.html', content)
-
 def contact(request):
-    request.session['userinfo'] = None
     return render(request, 'blog/contact.html')
