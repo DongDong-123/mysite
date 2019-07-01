@@ -1,0 +1,23 @@
+# 忽略文件列表
+
+# 忽略所有pyc文件
+*.pyc
+
+# 忽略数据库配置文件
+setting.json
+
+# 忽略服务器配置文件
+
+uwsgi.ini
+
+mysite_nginx.conf
+
+# 忽略pycharm 配置文件
+.idea
+
+# 忽略日志文件
+*.log
+
+# uwsgi pid
+uwsgi.pid
+uwsgi_params
