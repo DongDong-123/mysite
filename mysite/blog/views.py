@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
 from django.db.models import Q
 
+
 # import time
 # from django.views.generic import View
 # from django.core.cache import cache

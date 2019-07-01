@@ -6,7 +6,7 @@ from django.conf.urls import url, include
 urlpatterns = [
     path('admins/', admin.site.urls),
     path('', include('blog.urls')),
-    path('', include('polls.urls')),
+    #path('', include('polls.urls')),
     # path('', include('shop.urlshome')),
     # path('', include('news.urlsnews')),
     # path('', include('myadmin.urls')),

@@ -27,9 +27,9 @@ SECRET_KEY = 'f%1v@a6b4t#3n5&-m5*5qf2w)kihlma2h&fnj6y%ikc4te4=g4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # 为FALSE时，本地调试可能会无法加载静态文件
-DEBUG =True
+DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", '*.*.*.*','api.dondongweb.club']
+ALLOWED_HOSTS = ["127.0.0.1", '*.*.*.*','www.dondongweb.club']
 
 # Application definition
 # 读取配置文件
@@ -62,8 +62,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls',
-    'myadmin',
+    #'polls',
+    #'myadmin',
     #'news',
     #'shop',
     'ueditor',
@@ -228,6 +228,7 @@ LOGGING = {
         # }
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
